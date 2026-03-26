@@ -1,37 +1,56 @@
-import { createApiHandler } from 'next-api-handler';
+export default async function handler(req, res) {
+  // Only POST allowed
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
 
-// Get the API key from environment variables
-const API_KEY = process.env.ANTHROPIC_API_KEY;
+  const { sectionKey, kickoffData } = req.body;
+  const apiKey = process.env.ANTHROPIC_API_KEY;
 
-// Proxy requests to the Anthropic API
-const handler = async (req, res) => {
-    const apiUrl = 'https://api.anthropic.com/v1/generate';
+  if (!apiKey) {
+    console.error('ANTHROPIC_API_KEY not configured');
+    return res.status(500).json({ error: 'API key not configured' });
+  }
 
-    const response = await fetch(apiUrl, {
-        method: req.method,
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${API_KEY}`,
-        },
-        body: JSON.stringify(req.body),
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 2500,
+        stream: true,
+        messages: [{ role: 'user', content: kickoffData }],
+      }),
     });
 
     if (!response.ok) {
-        return res.status(response.status).json({ error: 'Failed to call Anthropic API' });
+      const error = await response.text();
+      console.error('Anthropic API error:', error);
+      return res.status(response.status).json({ error: 'API error' });
     }
 
-    // Handle streaming responses
+    // Set headers for streaming
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+
+    // Stream the response
     const reader = response.body.getReader();
-    const decoder = new TextDecoder('utf-8');
-    let done, result;
-    let responseBody = '';
+    const decoder = new TextDecoder();
 
-    while ({ done, result } = await reader.read()) {
-        responseBody += decoder.decode(result, { stream: true });
-        // Optionally process each chunk of data here
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      res.write(decoder.decode(value));
     }
 
-    return res.status(200).json({ data: responseBody });
-};
-
-export default createApiHandler({ handler });
+    res.end();
+  } catch (error) {
+    console.error('Error calling Anthropic API:', error);
+    res.status(500).json({ error: 'Internal server error', details: error.message });
+  }
+}
