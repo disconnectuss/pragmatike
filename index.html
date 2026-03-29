@@ -30,7 +30,6 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 14px; min-height: 100vh; overflow-x: hidden; }
 
-/* PASSWORD GATE */
 #passwordGate {
   position: fixed; inset: 0; background: var(--bg); z-index: 9999;
   display: flex; align-items: center; justify-content: center;
@@ -59,7 +58,6 @@ body { background: var(--bg); color: var(--text); font-family: var(--font); font
 .gate-error { font-size: 12px; color: var(--red); margin-top: 10px; display: none; }
 .gate-error.show { display: block; }
 
-/* HEADER */
 header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   background: rgba(13,13,16,0.9); backdrop-filter: blur(18px);
@@ -76,10 +74,8 @@ header {
 .h-link:hover { color: var(--purple-light); }
 .h-badge { background: var(--purple-dim); border: 1px solid var(--purple-glow); color: var(--purple-light); font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 99px; letter-spacing: 0.5px; }
 
-/* LAYOUT */
 main { padding-top: 56px; display: grid; grid-template-columns: 400px 1fr; min-height: 100vh; }
 
-/* LEFT PANEL */
 .left-panel {
   position: sticky; top: 56px; height: calc(100vh - 56px);
   overflow-y: auto; border-right: 1px solid var(--border);
@@ -89,17 +85,14 @@ main { padding-top: 56px; display: grid; grid-template-columns: 400px 1fr; min-h
 .left-panel::-webkit-scrollbar-thumb { background: var(--border); }
 .panel-label { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: var(--text3); text-transform: uppercase; margin-bottom: 14px; }
 
-/* TABS */
 .tabs { display: flex; background: var(--bg); border-radius: 8px; padding: 3px; margin-bottom: 20px; border: 1px solid var(--border); gap: 2px; }
 .tab-btn { flex: 1; background: none; border: none; color: var(--text3); font-family: var(--font); font-size: 11px; font-weight: 600; padding: 7px 5px; cursor: pointer; border-radius: 5px; transition: all 0.18s; }
 .tab-btn.active { background: var(--purple); color: #fff; }
 .tab-content { display: none; }
 .tab-content.active { display: block; }
 
-/* URL TAB info */
 .url-info { background: var(--purple-dim); border: 1px solid var(--purple-glow); border-radius: 7px; padding: 10px 12px; margin-bottom: 13px; font-size: 11px; color: var(--purple-light); line-height: 1.6; }
 
-/* UPLOAD */
 .upload-zone { border: 2px dashed var(--border); border-radius: 9px; padding: 24px 12px; text-align: center; cursor: pointer; transition: all 0.2s; margin-bottom: 13px; background: var(--surface2); }
 .upload-zone:hover, .upload-zone.drag-over { border-color: var(--purple); background: var(--purple-dim); }
 .upload-zone h3 { font-size: 13px; font-weight: 700; margin: 7px 0 3px; }
@@ -107,7 +100,6 @@ main { padding-top: 56px; display: grid; grid-template-columns: 400px 1fr; min-h
 .upload-zone input { display: none; }
 .file-loaded { background: rgba(0,200,150,0.08); border: 1px solid rgba(0,200,150,0.3); border-radius: 6px; padding: 8px 12px; display: flex; align-items: center; gap: 8px; margin-bottom: 13px; font-family: var(--mono); font-size: 11px; color: var(--green); }
 
-/* FORM */
 .form-section { margin-bottom: 15px; }
 .form-section-title { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: var(--purple-light); text-transform: uppercase; margin-bottom: 9px; padding-bottom: 5px; border-bottom: 1px solid var(--border); }
 .field { margin-bottom: 9px; }
@@ -116,7 +108,6 @@ input[type="text"], textarea, select { width: 100%; background: var(--surface2);
 input[type="text"]:focus, textarea:focus { border-color: var(--purple); }
 textarea { min-height: 62px; }
 
-/* SECTIONS PICKER */
 .sections-picker { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 13px; margin: 13px 0; }
 .sections-picker .panel-label { margin-bottom: 9px; }
 .check-row { display: flex; align-items: center; gap: 8px; padding: 5px 2px; border-bottom: 1px solid var(--border); cursor: pointer; }
@@ -124,7 +115,6 @@ textarea { min-height: 62px; }
 .check-row input[type="checkbox"] { accent-color: var(--purple); width: 14px; height: 14px; cursor: pointer; }
 .check-row span { font-size: 12px; font-weight: 500; color: var(--text); }
 
-/* GENERATE BTN */
 .generate-btn { width: 100%; background: var(--purple); color: #fff; border: none; border-radius: 8px; padding: 13px; font-family: var(--font); font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.18s; position: relative; overflow: hidden; }
 .generate-btn:hover:not(:disabled) { background: var(--purple-light); box-shadow: 0 6px 24px var(--purple-glow); transform: translateY(-1px); }
 .generate-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
@@ -133,10 +123,8 @@ textarea { min-height: 62px; }
 .error-msg { background: rgba(255,79,79,0.1); border: 1px solid rgba(255,79,79,0.3); color: var(--red); padding: 9px 12px; border-radius: 6px; font-size: 12px; margin-bottom: 9px; display: none; }
 .error-msg.show { display: block; }
 
-/* RIGHT PANEL */
 .right-panel { padding: 32px 38px; }
 
-/* EMPTY STATE */
 .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: calc(100vh - 120px); text-align: center; }
 .empty-glyph { width: 68px; height: 68px; border-radius: 16px; background: var(--purple-dim); border: 1px solid var(--purple-glow); display: flex; align-items: center; justify-content: center; font-size: 30px; margin-bottom: 20px; }
 .empty-state h2 { font-size: 21px; font-weight: 700; margin-bottom: 8px; }
@@ -146,12 +134,10 @@ textarea { min-height: 62px; }
 .cap-item strong { display: block; font-size: 12px; font-weight: 700; margin-bottom: 2px; }
 .cap-item span { font-size: 11px; color: var(--text3); }
 
-/* PROGRESS BAR */
 .progress-bar-wrap { height: 2px; background: var(--border); border-radius: 1px; margin-bottom: 20px; overflow: hidden; display: none; }
 .progress-bar-wrap.active { display: block; }
 .progress-bar { height: 100%; background: linear-gradient(90deg, var(--purple), var(--purple-light)); width: 0%; transition: width 0.4s ease; }
 
-/* RESULTS */
 .results-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px; gap: 14px; }
 .results-title { font-size: 21px; font-weight: 700; margin-bottom: 3px; }
 .results-title span { color: var(--purple-light); }
@@ -160,7 +146,6 @@ textarea { min-height: 62px; }
 .export-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text2); padding: 9px 16px; border-radius: 7px; font-family: var(--font); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.18s; white-space: nowrap; flex-shrink: 0; }
 .export-btn:hover { border-color: var(--purple); color: var(--purple-light); }
 
-/* SECTION CARDS */
 .sections-grid { display: flex; flex-direction: column; gap: 10px; }
 .section-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; animation: fadeUp 0.32s ease both; }
 @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -176,14 +161,12 @@ textarea { min-height: 62px; }
 .section-body { display: none; padding: 16px 18px; }
 .section-body.open { display: block; }
 
-/* CONTENT */
 .content-text { font-size: 13px; line-height: 1.78; color: var(--text2); white-space: pre-wrap; }
 .copy-btn { margin-top: 11px; background: var(--surface2); border: 1px solid var(--border); color: var(--text3); padding: 5px 13px; border-radius: 4px; font-family: var(--mono); font-size: 10px; cursor: pointer; transition: all 0.18s; }
 .copy-btn:hover, .copy-btn.copied { border-color: var(--green); color: var(--green); }
 .int-badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(255,112,67,0.1); border: 1px solid rgba(255,112,67,0.25); color: var(--orange); font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 4px; margin-bottom: 12px; }
 .pub-badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(0,200,150,0.1); border: 1px solid rgba(0,200,150,0.25); color: var(--green); font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 4px; margin-bottom: 12px; }
 
-/* SEQUENCES */
 .sequence-tabs { display: flex; gap: 5px; margin-bottom: 11px; flex-wrap: wrap; }
 .seq-tab { background: var(--surface2); border: 1px solid var(--border); color: var(--text3); padding: 5px 11px; border-radius: 4px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.18s; }
 .seq-tab.active { border-color: var(--purple); color: var(--purple-light); background: var(--purple-dim); }
@@ -194,7 +177,6 @@ textarea { min-height: 62px; }
 .message-subject { font-size: 12px; font-weight: 700; margin-bottom: 7px; padding-bottom: 7px; border-bottom: 1px solid var(--border); color: var(--text); }
 .message-body { font-size: 13px; line-height: 1.72; color: var(--text2); white-space: pre-wrap; }
 
-/* RETRY OUTREACH */
 .retry-section { margin-top: 18px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 14px 15px; }
 .retry-title { font-size: 11px; font-weight: 700; color: var(--text2); margin-bottom: 9px; }
 .retry-input { width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-family: var(--font); font-size: 12px; padding: 8px 10px; outline: none; resize: none; min-height: 56px; transition: border-color 0.18s; margin-bottom: 8px; }
@@ -203,40 +185,50 @@ textarea { min-height: 62px; }
 .retry-btn:hover:not(:disabled) { background: var(--purple); color: #fff; }
 .retry-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-/* QUESTIONS */
 .question-list { display: flex; flex-direction: column; gap: 8px; }
 .question-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 7px; padding: 11px 13px; }
 .question-num { font-family: var(--mono); font-size: 9px; color: var(--purple-light); margin-bottom: 5px; letter-spacing: 0.5px; }
 .question-text { font-size: 13px; line-height: 1.6; font-weight: 500; }
 .question-note { font-size: 11px; color: var(--text3); margin-top: 5px; font-style: italic; }
 
-/* STREAMING */
 .stream-placeholder { display: flex; align-items: center; gap: 9px; padding: 14px 0; }
 .stream-cursor { width: 8px; height: 15px; background: var(--purple); border-radius: 2px; animation: blink 0.75s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
 
-/* TOAST */
 .toast { position: fixed; bottom: 20px; right: 20px; background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 9px 18px; border-radius: 7px; font-size: 12px; font-weight: 600; z-index: 1000; transform: translateY(50px); opacity: 0; transition: all 0.25s; }
 .toast.show { transform: translateY(0); opacity: 1; }
 
-@media (max-width: 860px) { main { grid-template-columns: 1fr; } .left-panel { position: static; height: auto; } }
+@media (max-width: 860px) {
+  main { grid-template-columns: 1fr; }
+  .left-panel { position: static; height: auto; }
+  .right-panel { padding: 20px 16px; }
+  .cap-grid { grid-template-columns: repeat(2, 1fr); }
+  .results-header { flex-direction: column; }
+  .sequence-tabs { flex-wrap: wrap; }
+  .section-body { padding: 12px 13px; }
+}
 </style>
 </head>
 <body>
 
-<!-- PASSWORD GATE -->
 <div id="passwordGate">
   <div class="gate-card">
     <div class="gate-logo">pragma<span>tike</span></div>
     <div class="gate-sub">Internal Tool · Brief Generator</div>
     <label class="gate-label">Access Password</label>
-    <input type="password" class="gate-input" id="gateInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkPassword()">
+    <div style="position:relative">
+      <input type="password" class="gate-input" id="gateInput" placeholder="••••••••" style="padding-right:40px;margin-bottom:0" onkeydown="if(event.key==='Enter')checkPassword()">
+      <button type="button" onclick="togglePw()" id="pwToggle" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:14px;color:var(--text3);padding:4px;line-height:1;font-family:var(--font)" title="Show password">
+        <svg id="pwIconShow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        <svg id="pwIconHide" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+      </button>
+    </div>
+    <div style="height:13px"></div>
     <button class="gate-btn" onclick="checkPassword()">Unlock →</button>
     <div class="gate-error" id="gateError">Incorrect password. Try again.</div>
   </div>
 </div>
 
-<!-- HEADER -->
 <header>
   <div class="logo-area">
     <div class="logo-mark">pragma<span>tike</span></div>
@@ -246,6 +238,7 @@ textarea { min-height: 62px; }
   <div class="header-right">
     <a href="https://www.pragmatike.com/talents" target="_blank" class="h-link">Talents ↗</a>
     <div class="h-badge">Internal</div>
+    <button onclick="logout()" style="background:none;border:1px solid var(--border);color:var(--text3);font-family:var(--font);font-size:11px;font-weight:600;padding:5px 12px;border-radius:6px;cursor:pointer;transition:all 0.2s" onmouseover="this.style.borderColor='var(--red)';this.style.color='var(--red)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text3)'">Logout</button>
   </div>
 </header>
 
@@ -259,7 +252,6 @@ textarea { min-height: 62px; }
       <button class="tab-btn" onclick="switchTab('form')">✍️ Form</button>
     </div>
 
-    <!-- TAB 1: URL -->
     <div class="tab-content active" id="tab-url">
       <div class="url-info">Fastest method: paste the client website + their job post directly. Add any notes from your call below.</div>
       <div class="field"><label>Client Website URL</label><input type="text" id="u_website" placeholder="https://company.io"></div>
@@ -267,7 +259,6 @@ textarea { min-height: 62px; }
       <div class="field"><label>Notes / Call Transcript</label><textarea id="u_notes" style="min-height:80px" placeholder="Paste notes or transcript from the video call with the hiring manager..."></textarea></div>
     </div>
 
-    <!-- TAB 2: File Upload -->
     <div class="tab-content" id="tab-upload">
       <div class="upload-zone" id="dropzone" onclick="document.getElementById('fileInput').click()">
         <div style="font-size:24px">📊</div>
@@ -279,7 +270,6 @@ textarea { min-height: 62px; }
       <div class="field"><label>Call Notes / Transcript (optional)</label><textarea id="uploadTranscript" placeholder="Paste notes from the hiring manager call..."></textarea></div>
     </div>
 
-    <!-- TAB 3: Manual Form -->
     <div class="tab-content" id="tab-form">
       <div class="form-section">
         <div class="form-section-title">🏢 Company</div>
@@ -352,7 +342,10 @@ textarea { min-height: 62px; }
           <div class="results-sub" id="resultsSub">Pragmatike Recruitment Brief</div>
           <div class="conf-badge">🔒 CONFIDENTIAL — Internal Use Only</div>
         </div>
-        <button class="export-btn" onclick="exportBrief()">📄 Export JSON</button>
+        <div style="display:flex;gap:8px;flex-shrink:0">
+          <button class="export-btn" onclick="exportBrief()">📄 JSON</button>
+          <button class="export-btn" onclick="exportMarkdown()">📝 Markdown</button>
+        </div>
       </div>
       <div class="sections-grid" id="sectionsGrid"></div>
     </div>
@@ -362,19 +355,40 @@ textarea { min-height: 62px; }
 <div class="toast" id="toast"></div>
 
 <script>
-// ══ PASSWORD GATE ══
-// To change: generate SHA-256 of your password at https://emn178.github.io/online-tools/sha256.html
-// Replace the hash below. Current password: pragmatike2025
-const CORRECT_HASH = '69061231986317e182672aa638419f1dc97eaedb192c53b9ab8736cfa82d8535';
 
+function logout() { sessionStorage.removeItem('prg_auth'); document.getElementById('passwordGate').style.display = 'flex'; document.getElementById('gateInput').value = ''; }
+function togglePw() {
+  const inp = document.getElementById('gateInput');
+  const btn = document.getElementById('pwToggle');
+  const show = inp.type === 'password';
+  inp.type = show ? 'text' : 'password';
+  document.getElementById('pwIconShow').style.display = show ? 'none' : 'block';
+  document.getElementById('pwIconHide').style.display = show ? 'block' : 'none';
+  btn.title = show ? 'Hide password' : 'Show password';
+}
+const PW_HASH = '69061231986317e182672aa638419f1dc97eaedb192c53b9ab8736cfa82d8535';
 async function sha256(str) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
 }
 async function checkPassword() {
   const pw = document.getElementById('gateInput').value;
-  const hash = await sha256(pw);
-  if (hash === CORRECT_HASH) {
+  if (!pw) return;
+  const btn = document.querySelector('.gate-btn');
+  btn.disabled = true; btn.textContent = 'Checking...';
+  let ok = false;
+  try {
+    const resp = await fetch('/api/verifyPassword', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw })
+    });
+    if (resp.status === 405 || resp.status === 404) throw new Error('no backend');
+    const data = await resp.json();
+    ok = data.ok;
+  } catch {
+    ok = (await sha256(pw)) === PW_HASH;
+  }
+  if (ok) {
     document.getElementById('passwordGate').style.display = 'none';
     sessionStorage.setItem('prg_auth', '1');
   } else {
@@ -382,15 +396,16 @@ async function checkPassword() {
     document.getElementById('gateInput').style.borderColor = 'var(--red)';
     setTimeout(() => { document.getElementById('gateInput').style.borderColor = ''; }, 1200);
   }
+  btn.disabled = false; btn.textContent = 'Unlock \u2192';
 }
 if (sessionStorage.getItem('prg_auth') === '1') document.getElementById('passwordGate').style.display = 'none';
 
-// ══ STATE ══
+
 let parsedFileData = null;
 let currentTab = 'url';
 let briefData = {};
 
-// ══ TABS ══
+
 function switchTab(tab) {
   currentTab = tab;
   ['url','upload','form'].forEach((t,i) => {
@@ -399,7 +414,7 @@ function switchTab(tab) {
   });
 }
 
-// ══ FILE UPLOAD ══
+
 const dz = document.getElementById('dropzone');
 dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
 dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
@@ -411,19 +426,26 @@ function handleFileObj(file) {
   document.getElementById('fileLoaded').style.display = 'flex';
   const reader = new FileReader();
   reader.onload = e => {
-    const wb = XLSX.read(new Uint8Array(e.target.result), { type: 'array' });
-    let txt = '';
-    wb.SheetNames.forEach(n => {
-      const rows = XLSX.utils.sheet_to_json(wb.Sheets[n], { header:1, defval:'' });
-      txt += `\n=== Sheet: ${n} ===\n`;
-      rows.forEach(r => { if (r.some(c=>c!=='')) txt += r.join(' | ') + '\n'; });
-    });
-    parsedFileData = txt;
+    try {
+      const wb = XLSX.read(new Uint8Array(e.target.result), { type: 'array' });
+      let txt = '';
+      wb.SheetNames.forEach(n => {
+        const rows = XLSX.utils.sheet_to_json(wb.Sheets[n], { header:1, defval:'' });
+        txt += `\n=== Sheet: ${n} ===\n`;
+        rows.forEach(r => { if (r.some(c=>c!=='')) txt += r.join(' | ') + '\n'; });
+      });
+      if (!txt.trim()) { showError('File appears empty. Please check the file and try again.'); parsedFileData = null; return; }
+      parsedFileData = txt;
+    } catch {
+      showError('Could not parse file. Please make sure it is a valid Excel file.');
+      parsedFileData = null;
+      document.getElementById('fileLoaded').style.display = 'none';
+    }
   };
   reader.readAsArrayBuffer(file);
 }
 
-// ══ COLLECT DATA ══
+
 function collectData() {
   if (currentTab === 'url') {
     const w = document.getElementById('u_website').value.trim();
@@ -443,7 +465,7 @@ function collectData() {
   return ok ? out : null;
 }
 
-// ══ SECTIONS CONFIG ══
+
 const SECTIONS = [
   { id:'sec_company',    key:'company_summary',    icon:'📋', name:'Company & Role Summary',          tag:'INTERNAL',         tagBg:'rgba(124,92,252,0.12)', tagColor:'#9b80ff' },
   { id:'sec_jobpost',    key:'job_post',            icon:'💼', name:'Job Post',                        tag:'PRAGMATIKE FORMAT', tagBg:'rgba(255,112,67,0.12)', tagColor:'#ff7043' },
@@ -456,7 +478,7 @@ const SECTIONS = [
   { id:'sec_hotopics',   key:'hot_topics',          icon:'🔥', name:'Industry Hot Topics',             tag:'INTEL',             tagBg:'rgba(124,92,252,0.12)', tagColor:'#9b80ff' },
 ];
 
-// ══ PARALLEL GENERATION ══
+
 async function generateBrief() {
   const raw = collectData();
   const errEl = document.getElementById('errorMsg');
@@ -500,7 +522,6 @@ async function generateBrief() {
     grid.appendChild(card);
   });
 
-  // Fire all sections in parallel (3 at a time to avoid rate limits)
   const CONCURRENCY = 3;
   for (let i = 0; i < active.length; i += CONCURRENCY) {
     await Promise.all(active.slice(i, i+CONCURRENCY).map(sec => runSection(sec, raw, tick)));
@@ -530,14 +551,17 @@ async function runSection(sec, raw, onDone) {
         try { const e=JSON.parse(line.slice(6)); if(e.type==='content_block_delta'&&e.delta?.type==='text_delta') acc+=e.delta.text; } catch {}
       }
     }
-    const parsed = JSON.parse(acc.replace(/```json|```/g,'').trim());
+    let parsed;
+    try { parsed = JSON.parse(acc.replace(/```json|```/g,'').trim()); }
+    catch { throw new Error('Invalid JSON response from API'); }
     if (parsed.company_name) briefData.company_name = parsed.company_name;
     if (parsed.role_title) briefData.role_title = parsed.role_title;
     if (parsed[sec.key]!==undefined) briefData[sec.key] = parsed[sec.key];
     renderSection(sec, parsed[sec.key]);
-  } catch {
+  } catch (err) {
     const el = document.getElementById(`body-${sec.key}`);
-    if (el) el.innerHTML = `<div style="color:var(--red);font-size:12px;padding:8px 0">Failed. <button class="copy-btn" onclick="retrySingle('${sec.key}')">↺ Retry</button></div>`;
+    const msg = err.message || 'Unknown error';
+    if (el) el.innerHTML = `<div style="color:var(--red);font-size:12px;padding:8px 0">Failed: ${h(msg)} <button class="copy-btn" onclick="retrySingle('${sec.key}')">↺ Retry</button></div>`;
   }
   onDone();
 }
@@ -549,12 +573,12 @@ async function retrySingle(key) {
   await runSection(sec, raw, ()=>{});
 }
 
-// ══ RETRY OUTREACH ══
+
 async function retryOutreach() {
   const feedback = document.getElementById('retryFeedbackInput')?.value?.trim() || '';
   const raw = collectData() || JSON.stringify(briefData);
   const btn = document.getElementById('retryOutreachBtn');
-  btn.disabled = true; btn.textContent = 'Generating...';
+  btn.disabled = true; btn.innerHTML = '<span style="display:inline-flex;align-items:center;gap:6px"><div class="stream-cursor" style="width:6px;height:12px;display:inline-block"></div> Regenerating...</span>';
 
   const seqsEl = document.querySelector('#body-outreach .outreach-seqs');
   if (seqsEl) seqsEl.innerHTML = `<div class="stream-placeholder"><div class="stream-cursor"></div><span style="font-family:var(--mono);font-size:11px;color:var(--text3);margin-left:6px">Regenerating sequences...</span></div>`;
@@ -567,14 +591,16 @@ async function retryOutreach() {
     let buf='',acc='';
     const reader=resp.body.getReader(),dec=new TextDecoder();
     while(true){const{done,value}=await reader.read();if(done)break;buf+=dec.decode(value,{stream:true});const lines=buf.split('\n');buf=lines.pop();for(const l of lines){if(!l.startsWith('data: '))continue;try{const e=JSON.parse(l.slice(6));if(e.type==='content_block_delta'&&e.delta?.type==='text_delta')acc+=e.delta.text;}catch{}}}
-    const parsed=JSON.parse(acc.replace(/```json|```/g,'').trim());
+    let parsed;
+    try { parsed=JSON.parse(acc.replace(/```json|```/g,'').trim()); }
+    catch { throw new Error('Invalid JSON response'); }
     if(parsed.outreach){briefData.outreach=parsed.outreach;renderSection(SECTIONS.find(s=>s.key==='outreach'),parsed.outreach);}
-  } catch { if(seqsEl) seqsEl.innerHTML=`<div style="color:var(--red);font-size:12px">Retry failed. Try again.</div>`; }
+  } catch (err) { if(seqsEl) seqsEl.innerHTML=`<div style="color:var(--red);font-size:12px">Retry failed: ${h(err.message||'Unknown error')}. Try again.</div>`; }
 
   btn.disabled=false; btn.textContent='↺ Regenerate';
 }
 
-// ══ RENDER ══
+
 function renderSection(sec, content) {
   const el = document.getElementById(`body-${sec.key}`);
   if (el) el.innerHTML = buildBody(sec, content);
@@ -622,7 +648,7 @@ function buildBody(sec, content) {
   return `<div class="content-text">${JSON.stringify(content,null,2)}</div>`;
 }
 
-// ══ UI HELPERS ══
+
 function toggleSection(key) {
   const body=document.getElementById(`body-${key}`),chev=document.getElementById(`chev-${key}`),header=body?.previousElementSibling;
   if(!body)return; const open=body.classList.contains('open');
@@ -634,10 +660,35 @@ function switchSeqTab(btn,group) {
   container.querySelectorAll(`[data-seq="${group}"]`).forEach((c,i)=>c.classList.toggle('active',i===idx));
   btn.classList.add('active');
 }
+function showError(msg) { const el=document.getElementById('errorMsg'); el.textContent=msg; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'),5000); }
 function h(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function esc(s){if(!s)return'';return String(s).replace(/\\/g,'\\\\').replace(/`/g,'\\`').replace(/\$/g,'\\$');}
 function copyText(btn,text){navigator.clipboard.writeText(text).then(()=>{const o=btn.textContent;btn.textContent='✓ Copied!';btn.classList.add('copied');setTimeout(()=>{btn.textContent=o;btn.classList.remove('copied');},2000);});}
 function exportBrief(){if(!briefData)return;const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(briefData,null,2)],{type:'application/json'}));a.download=`pragmatike_${(briefData.role_title||'brief').replace(/\s+/g,'_').toLowerCase()}.json`;a.click();}
+function exportMarkdown(){if(!briefData)return;
+  let md=`# Pragmatike Brief: ${briefData.role_title||'Role'}\n`;
+  if(briefData.company_name)md+=`**Company:** ${briefData.company_name}\n`;
+  md+='\n---\n\n';
+  SECTIONS.forEach(sec=>{
+    const d=briefData[sec.key]; if(!d)return;
+    md+=`## ${sec.icon} ${sec.name}\n\n`;
+    if(typeof d==='string'){md+=d+'\n\n';}
+    else if(sec.key==='outreach'&&d.email){
+      md+='### Email Sequence\n\n';
+      (d.email||[]).forEach(m=>{md+=`**${m.label}**\n\nSubject: ${m.subject||''}\n\n${m.body||''}\n\n---\n\n`;});
+      md+='### LinkedIn Sequence\n\n';
+      (d.linkedin||[]).forEach(m=>{md+=`**${m.label}**\n\n${m.body||''}\n\n---\n\n`;});
+    } else if(sec.key==='screener'&&Array.isArray(d)){
+      d.forEach((q,i)=>{md+=`**Q${i+1}.** ${q.question}\n`;(q.options||[]).forEach((o,oi)=>{md+=`  ${['A','B','C','D'][oi]}. ${o}\n`;});if(q.why_it_matters)md+=`  _${q.why_it_matters}_\n`;md+='\n';});
+    } else if(sec.key==='interview_questions'&&d.technical){
+      md+='### Technical\n\n';(d.technical||[]).forEach((q,i)=>{md+=`${i+1}. ${q}\n`;});
+      md+='\n### Culture Fit\n\n';(d.culture_fit||[]).forEach((q,i)=>{md+=`${i+1}. ${q}\n`;});md+='\n';
+    } else if(Array.isArray(d)){
+      d.forEach(item=>{md+=`- **${item.name||item.city||item.topic}**`;if(item.country)md+=`, ${item.country}`;if(item.type)md+=` (${item.type})`;md+=`: ${item.one_liner||item.why||item.why_it_matters||''}\n`;});md+='\n';
+    } else {md+=JSON.stringify(d,null,2)+'\n\n';}
+  });
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([md],{type:'text/markdown'}));a.download=`pragmatike_${(briefData.role_title||'brief').replace(/\s+/g,'_').toLowerCase()}.md`;a.click();
+}
 </script>
 </body>
 </html>

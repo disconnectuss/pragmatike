@@ -1,5 +1,22 @@
+const rateMap = new Map();
+const RATE_LIMIT = 30;
+const RATE_WINDOW = 60_000;
+
+function isRateLimited(ip) {
+  const now = Date.now();
+  const entry = rateMap.get(ip);
+  if (!entry || now - entry.start > RATE_WINDOW) {
+    rateMap.set(ip, { start: now, count: 1 });
+    return false;
+  }
+  entry.count++;
+  return entry.count > RATE_LIMIT;
+}
+
+const MAX_INPUT_LENGTH = 50_000;
+const STREAM_TIMEOUT = 45_000;
+
 export default async function handler(req, res) {
-  // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -10,6 +27,11 @@ export default async function handler(req, res) {
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  const clientIp = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || 'unknown';
+  if (isRateLimited(clientIp)) {
+    return res.status(429).json({ error: 'Too many requests. Please wait a moment.' });
   }
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
@@ -24,7 +46,12 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'kickoffData is required' });
   }
 
-  // ── Prompt building ──
+  if (typeof kickoffData !== 'string' || kickoffData.length > MAX_INPUT_LENGTH) {
+    return res.status(400).json({ error: `kickoffData must be a string under ${MAX_INPUT_LENGTH} characters.` });
+  }
+  if (kickoffData.trim().length < 20) {
+    return res.status(400).json({ error: 'kickoffData is too short. Please provide more details.' });
+  }
 
   const JOB_POST_SCHEMA = `"job_post": string — follow this EXACT Pragmatike format:
 
@@ -70,7 +97,6 @@ RULES: NEVER include client company name, team names, or salary figures.`;
   let prompt;
 
   if (retryOutreach) {
-    // Retry outreach with feedback
     prompt = `You are a senior recruiter at Pragmatike.
 
 ORIGINAL KICKOFF DATA:
@@ -85,7 +111,6 @@ Regenerate the outreach sequences. NEVER name the client company. Always mention
 
 Respond ONLY with valid JSON: { "outreach": { "email": [{label,subject,body}×3], "linkedin": [{label,body}×2] } }`;
   } else {
-    // Normal section generation
     if (!sectionKey || !SCHEMA[sectionKey]) {
       return res.status(400).json({ error: 'Invalid sectionKey' });
     }
@@ -104,6 +129,9 @@ Format: { "company_name": string, "role_title": string, ${SCHEMA[sectionKey]} }`
   }
 
   try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), STREAM_TIMEOUT);
+
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -117,15 +145,16 @@ Format: { "company_name": string, "role_title": string, ${SCHEMA[sectionKey]} }`
         stream: true,
         messages: [{ role: 'user', content: prompt }],
       }),
+      signal: controller.signal,
     });
 
     if (!response.ok) {
-      const error = await response.text();
-      console.error('Anthropic API error:', error);
-      return res.status(response.status).json({ error: 'API error', details: error });
+      clearTimeout(timeout);
+      const errorText = await response.text();
+      console.error('Anthropic API error:', errorText);
+      return res.status(response.status).json({ error: 'API error', details: errorText });
     }
 
-    // Stream the response back
     res.setHeader('Content-Type', 'text/event-stream');
     res.setHeader('Cache-Control', 'no-cache');
     res.setHeader('Connection', 'keep-alive');
@@ -133,15 +162,24 @@ Format: { "company_name": string, "role_title": string, ${SCHEMA[sectionKey]} }`
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
 
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      res.write(decoder.decode(value, { stream: true }));
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        res.write(decoder.decode(value, { stream: true }));
+      }
+    } finally {
+      clearTimeout(timeout);
     }
 
     res.end();
   } catch (error) {
     console.error('Error calling Anthropic API:', error);
-    res.status(500).json({ error: 'Internal server error', details: error.message });
+    if (!res.headersSent) {
+      const status = error.name === 'AbortError' ? 504 : 500;
+      const message = error.name === 'AbortError' ? 'Request timed out' : 'Internal server error';
+      return res.status(status).json({ error: message, details: error.message });
+    }
+    res.end();
   }
 }
